@@ -1,0 +1,33 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+   name: rajivns
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: javawebapppod
+  labels:
+    app: javawebapp 
+  namespace: rajivns
+spec:
+  containers:
+  - name: javaweappcontainer
+    image: rajiv84iya/javawebapp
+    ports:
+      - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: javawebappsvc
+  namespace: rajivns
+spec:
+  type: LoadBalancer
+  selector:
+    app: javawebapp 
+  ports:
+    - port: 80
+      targetPort: 8080
+...
